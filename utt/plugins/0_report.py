@@ -75,6 +75,12 @@ def add_args(parser: argparse.ArgumentParser):
     )
 
     parser.add_argument(
+        "--project-tasks-sort-by",
+        choices=[e.value for e in _v1._private.SortBy],
+        help="Sort projects by the specified key.",
+    )
+
+    parser.add_argument(
         "--per-day",
         action="store_true",
         default=False,

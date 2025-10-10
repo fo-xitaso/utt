@@ -22,7 +22,7 @@ from ...components.entry_parser import EntryParser
 from ...components.now import Now, now
 from ...components.output import Output
 from ...components.parse_args import parse_args
-from ...components.report_args import ReportArgs, csv_section_name_to_csv_section, report_args  # noqa
+from ...components.report_args import ReportArgs, SortBy, csv_section_name_to_csv_section, report_args  # noqa
 from ...components.report_model import ReportModel
 from ...components.report_model.model import report
 from ...report.csv_view import CSVReportView

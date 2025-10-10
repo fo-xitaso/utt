@@ -15,7 +15,7 @@ class ReportModel:
     def __init__(self, activities: Activities, args: ReportArgs):
         self.args = args
         self.summary_model = SummaryModel(activities, args.range)
-        self.projects_model = ProjectsModel(activities)
+        self.projects_model = ProjectsModel(activities, args.project_tasks_sort_by)
         self.per_day_model = PerDayModel(activities)
         self.activities_model = ActivitiesModel(activities)
         self.details_model = DetailsModel(activities)

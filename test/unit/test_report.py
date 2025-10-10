@@ -1,7 +1,10 @@
 import datetime
 import unittest
 
+from utt.components.report_args import SortBy
+from utt.data_structures.activity import Activity
 from utt.report.common import timedelta_to_billable
+from utt.report.projects.model import ProjectsModel
 
 TEST_CASES = [
     (dict(minutes=0), " 0.0"),
@@ -44,3 +47,32 @@ class TestTimedeltaToBillable(unittest.TestCase):
         for delta, billable in TEST_CASES:
             with self.subTest(delta=delta, billable=billable):
                 self.assertEqual(timedelta_to_billable(datetime.timedelta(**delta)), billable)
+
+
+class TestProjectTasksSorting(unittest.TestCase):
+
+    TEST_ACTIVITIES = [
+        ("asc", "a, b, c"),
+        ("desc", "c, b, a"),
+        ("date_asc", "c, a, b"),
+        ("date_desc", "b, a, c"),
+        ("duration_asc", "a, c, b"),
+        ("duration_desc", "b, c, a"),
+    ],
+
+    def test_project_tasks_sort_by(self):
+
+        test_activities = [
+            Activity("Project: a", datetime.datetime(2024, 1, 1, 6, 0), datetime.datetime(2024, 1, 1, 7, 0), False, None),
+            Activity("Project: b", datetime.datetime(2024, 1, 1, 7, 0), datetime.datetime(2024, 1, 1, 10, 0), False, None),
+            Activity("Project: c", datetime.datetime(2024, 1, 1, 5, 0), datetime.datetime(2024, 1, 1, 7, 0), False, None),
+        ]
+
+        for sort_by_value, expected in self.TEST_ACTIVITIES:
+            sort_by = SortBy(sort_by_value)
+            with self.subTest(sort_by=sort_by, expected=expected):
+            
+                model = ProjectsModel(test_activities, sort_by)
+
+                result: str = model.projects[0]["name"]
+                assert result == expected
