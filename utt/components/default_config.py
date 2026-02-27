@@ -1,7 +1,9 @@
 import configparser
 
-DEFAULTS = {}
-
+DEFAULTS = {
+    "timezone": {"enabled": "false"},
+    "report": {"project_tasks_sort_by": "asc"}
+}
 
 class DefaultConfig:
     def __init__(self):
