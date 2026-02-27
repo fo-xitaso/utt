@@ -58,20 +58,26 @@ class TestProjectTasksSorting(unittest.TestCase):
         ("date_desc", "b, a, c"),
         ("duration_asc", "a, c, b"),
         ("duration_desc", "b, c, a"),
-    ],
+    ]
 
     def test_project_tasks_sort_by(self):
 
         test_activities = [
-            Activity("Project: a", datetime.datetime(2024, 1, 1, 6, 0), datetime.datetime(2024, 1, 1, 7, 0), False, None),
-            Activity("Project: b", datetime.datetime(2024, 1, 1, 7, 0), datetime.datetime(2024, 1, 1, 10, 0), False, None),
-            Activity("Project: c", datetime.datetime(2024, 1, 1, 5, 0), datetime.datetime(2024, 1, 1, 7, 0), False, None),
+            Activity(
+                "Project: a", datetime.datetime(2024, 1, 1, 6, 0), datetime.datetime(2024, 1, 1, 7, 0), False, None
+            ),
+            Activity(
+                "Project: b", datetime.datetime(2024, 1, 1, 7, 0), datetime.datetime(2024, 1, 1, 10, 0), False, None
+            ),
+            Activity(
+                "Project: c", datetime.datetime(2024, 1, 1, 5, 0), datetime.datetime(2024, 1, 1, 7, 0), False, None
+            ),
         ]
 
         for sort_by_value, expected in self.TEST_ACTIVITIES:
             sort_by = SortBy(sort_by_value)
             with self.subTest(sort_by=sort_by, expected=expected):
-            
+
                 model = ProjectsModel(test_activities, sort_by)
 
                 result: str = model.projects[0]["name"]

@@ -1,8 +1,7 @@
 import configparser
 
-DEFAULTS = {
-    "report": {"project_tasks_sort_by": "asc"}
-}
+DEFAULTS = {"report": {"project_tasks_sort_by": "asc"}}
+
 
 class DefaultConfig:
     def __init__(self):

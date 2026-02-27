@@ -47,15 +47,11 @@ def _tasks_sorted(activities: List[Activity], by: SortBy) -> List[str]:
         ),
         SortBy.duration_asc: lambda ts: sorted(
             ts,
-            key=lambda t: sum(
-                (act.duration for act in activities if act.name.task == t), datetime.timedelta()
-            ),
+            key=lambda t: sum((act.duration for act in activities if act.name.task == t), datetime.timedelta()),
         ),
         SortBy.duration_desc: lambda ts: sorted(
             ts,
-            key=lambda t: sum(
-                (act.duration for act in activities if act.name.task == t), datetime.timedelta()
-            ),
+            key=lambda t: sum((act.duration for act in activities if act.name.task == t), datetime.timedelta()),
             reverse=True,
         ),
     }
