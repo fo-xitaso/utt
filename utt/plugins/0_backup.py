@@ -27,10 +27,11 @@ class BackupHandler:
 
 def add_args(parser: argparse.ArgumentParser):
     parser.add_argument(
-        "-f", "--filepath",
+        "-f",
+        "--filepath",
         help="optional: filepath (default is the same as the data file with timestamp + .bak extension)",
         type=Path,
-        default=None
+        default=None,
     )
 
     parser.add_argument(
