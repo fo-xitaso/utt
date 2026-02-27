@@ -9,7 +9,7 @@ from ..common import filter_activities_by_type
 
 
 class ActivitiesModel:
-    def __init__(self, activities: List[Activity], sort_activities_by: SortBy):
+    def __init__(self, activities: List[Activity], sort_activities_by: SortBy | None):
         self.names_work = _groupby_name(filter_activities_by_type(activities, Activity.Type.WORK),sort_activities_by)
         self.names_break = _groupby_name(filter_activities_by_type(activities, Activity.Type.BREAK), sort_activities_by)
 
