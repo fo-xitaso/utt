@@ -9,11 +9,11 @@ from ..common import filter_activities_by_type
 
 
 class ProjectsModel:
-    def __init__(self, activities: List[Activity], sort_by: SortBy):
-        self.projects = groupby_project(filter_activities_by_type(activities, Activity.Type.WORK), sort_by)
+    def __init__(self, activities: List[Activity], sort_tasks_by: SortBy):
+        self.projects = _groupby_project(filter_activities_by_type(activities, Activity.Type.WORK), sort_tasks_by)
 
 
-def groupby_project(activities: List[Activity], sort_by: SortBy) -> List[Dict]:
+def _groupby_project(activities: List[Activity], sort_tasks_by: SortBy) -> List[Dict]:
     def key(act):
         return act.name.project
 
@@ -26,7 +26,7 @@ def groupby_project(activities: List[Activity], sort_by: SortBy) -> List[Dict]:
             {
                 "duration": formatter.format_duration(sum((act.duration for act in activities), datetime.timedelta())),
                 "project": project,
-                "name": ", ".join(_tasks_sorted(activities, sort_by)),
+                "name": ", ".join(_tasks_sorted(activities, sort_tasks_by)),
             }
         )
 
@@ -34,7 +34,7 @@ def groupby_project(activities: List[Activity], sort_by: SortBy) -> List[Dict]:
 
 
 def _tasks_sorted(activities: List[Activity], by: SortBy) -> List[str]:
-    tasks = sorted(set(act.name.task for act in activities))
+    tasks = sorted(set(act.name.task for act in activities), key=lambda t: t.lower())
     sort_map = {
         None: lambda ts: ts,
         SortBy.asc: lambda ts: ts,

@@ -81,6 +81,12 @@ def add_args(parser: argparse.ArgumentParser):
     )
 
     parser.add_argument(
+        "--activities-sort-by",
+        choices=[e.value for e in _v1._private.SortBy],
+        help="Sort activities by the specified key.",
+    )
+
+    parser.add_argument(
         "--per-day",
         action="store_true",
         default=False,

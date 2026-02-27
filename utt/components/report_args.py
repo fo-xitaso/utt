@@ -40,6 +40,7 @@ class ReportArgs(NamedTuple):
     current_activity_name: Optional[str]
     project_name_filter: Optional[str]
     project_tasks_sort_by: Optional[SortBy]
+    activities_sort_by: Optional[SortBy]
     csv_section: Optional[CSVSection]
     show_comments: bool
     show_details: bool
@@ -296,6 +297,7 @@ def report_args(args: argparse.Namespace, now: Now) -> ReportArgs:
     return ReportArgs(
         range=report_range,
         project_tasks_sort_by=SortBy(args.project_tasks_sort_by) if args.project_tasks_sort_by else None,
+        activities_sort_by=SortBy(args.activities_sort_by) if args.activities_sort_by else None,
         current_activity_name=current_activity_name,
         project_name_filter=args.project,
         csv_section=csv_section_name_to_csv_section.get(args.csv_section),

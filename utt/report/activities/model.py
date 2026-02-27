@@ -2,18 +2,19 @@ import itertools
 from datetime import timedelta
 from typing import Dict, List
 
+from ...components.report_args import SortBy
 from ...data_structures.activity import Activity
 from .. import formatter
 from ..common import filter_activities_by_type
 
 
 class ActivitiesModel:
-    def __init__(self, activities: List[Activity]):
-        self.names_work = _groupby_name(filter_activities_by_type(activities, Activity.Type.WORK))
-        self.names_break = _groupby_name(filter_activities_by_type(activities, Activity.Type.BREAK))
+    def __init__(self, activities: List[Activity], sort_activities_by: SortBy):
+        self.names_work = _groupby_name(filter_activities_by_type(activities, Activity.Type.WORK),sort_activities_by)
+        self.names_break = _groupby_name(filter_activities_by_type(activities, Activity.Type.BREAK), sort_activities_by)
 
 
-def _groupby_name(activities: List[Activity]) -> List[Dict]:
+def _groupby_name(activities: List[Activity], sort_activities_by) -> List[Dict]:
     def key(act):
         return act.name.name
 
