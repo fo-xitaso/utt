@@ -8,6 +8,7 @@ import cargo
 from ...command import Command
 from ...components.activities import Activities, activities
 from ...components.add_entry import AddEntry
+from ...components.backup import Backup
 from ...components.commands import Commands
 from ...components.config import config
 from ...components.config_dirname import ConfigDirname, config_dirname
@@ -33,6 +34,7 @@ def create_container():
     _container[Activities] = activities
     _container[AddEntry] = AddEntry
     _container[argparse.Namespace] = parse_args
+    _container[Backup] = Backup
     _container[Commands] = []
     _container[ConfigParser] = config
     _container[ConfigDirname] = config_dirname
